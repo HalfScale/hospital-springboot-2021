@@ -2,36 +2,78 @@ package com.springboot.hospital.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="user")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(name="user_type")
 	private int userType;
 	
+	@Column(name="registration_token")
 	private String registrationToken;
 	
-	private LocalDateTime dateTimePasswordReset;
+	@Column(name="datetime_password_reset")
+	private LocalDateTime datetimePasswordReset;
 	
+	@Column(name="reset_pass_token")
 	private String resetPassToken;
 	
+	@Column(name="email")
 	private String email;
 	
+	@Column(name="password")
 	private String password;
 	
+	@Column(name="is_confirmed")
 	private boolean isConfirmed;
 	
+	@Column(name="enabled")
 	private boolean enabled;
 	
+	@Column(name="created")
 	private LocalDateTime created;
 	
+	@Column(name="modified")
 	private LocalDateTime modified;
 	
+	@Column(name="deleted")
 	private boolean deleted;
 	
+	@Column(name="deleted_date")
 	private LocalDateTime deletedDate;
+	
+	public User() {
+	
+	}
+	
+	public User(int userType, String registrationToken, LocalDateTime datetimePasswordReset, String resetPassToken,
+			String email, String password, boolean isConfirmed, boolean enabled, LocalDateTime created,
+			LocalDateTime modified, boolean deleted, LocalDateTime deletedDate) {
+		super();
+		this.userType = userType;
+		this.registrationToken = registrationToken;
+		this.datetimePasswordReset = datetimePasswordReset;
+		this.resetPassToken = resetPassToken;
+		this.email = email;
+		this.password = password;
+		this.isConfirmed = isConfirmed;
+		this.enabled = enabled;
+		this.created = created;
+		this.modified = modified;
+		this.deleted = deleted;
+		this.deletedDate = deletedDate;
+	}
 
 	public int getUserType() {
 		return userType;
@@ -50,11 +92,11 @@ public class User {
 	}
 
 	public LocalDateTime getDateTimePasswordReset() {
-		return dateTimePasswordReset;
+		return datetimePasswordReset;
 	}
 
 	public void setDateTimePasswordReset(LocalDateTime dateTimePasswordReset) {
-		this.dateTimePasswordReset = dateTimePasswordReset;
+		this.datetimePasswordReset = dateTimePasswordReset;
 	}
 
 	public String getResetPassToken() {
@@ -128,6 +170,14 @@ public class User {
 	public void setDeletedDate(LocalDateTime deletedDate) {
 		this.deletedDate = deletedDate;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userType=" + userType + ", registrationToken=" + registrationToken
+				+ ", datetimePasswordReset=" + datetimePasswordReset + ", resetPassToken=" + resetPassToken + ", email="
+				+ email + ", password=" + password + ", isConfirmed=" + isConfirmed + ", enabled=" + enabled
+				+ ", created=" + created + ", modified=" + modified + ", deleted=" + deleted + ", deletedDate="
+				+ deletedDate + "]";
+	}
 	
 }
