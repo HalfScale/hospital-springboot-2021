@@ -8,28 +8,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.hospital.dao.UserDAO;
 import com.springboot.hospital.model.Response;
 import com.springboot.hospital.model.User;
+import com.springboot.hospital.service.UserService;
 
 @RestController
 public class UserRestController {
 	
-	private UserDAO userDAO;
+	private UserService userService;
 	
 	@Autowired
-	public UserRestController(UserDAO theUserDAO) {
-		userDAO = theUserDAO;
+	public UserRestController(UserService theUserService) {
+		userService = theUserService;
 	}
 	
 	@GetMapping("/users")
 	public List<User> findAll() {
-		return userDAO.findAll();
+		return userService.findAll();
 	}
 	
 	@GetMapping("/user/{id}")
 	public User findById(@PathVariable int id) {
-		return userDAO.findById(id);
+		
+		User user = userService.findById(id);
+		
+		if (user == null) {
+			throw new RuntimeException("Employee id: " + id + " not found!");
+		}
+		
+		return userService.findById(id);
 	}
 	
 	@PostMapping("/registration")

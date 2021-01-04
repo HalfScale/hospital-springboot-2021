@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	@Transactional // transaction annotation use is so that we dont have to manually start and commit transaction
+//	@Transactional // transaction annotation use is so that we dont have to manually start and commit transaction
 	public List<User> findAll() {
 		
 		Session currentSession = entityManager.unwrap(Session.class);
@@ -43,14 +43,22 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void save(User user) {
-		// TODO Auto-generated method stub
+		Session currentSession = entityManager.unwrap(Session.class);
 		
+		//save user
+		currentSession.saveOrUpdate(user); // remember if id = 0. perform insert, else then perform update.
 	}
 
 	@Override
-	public void deleteById(int theId) {
-		// TODO Auto-generated method stub
+	public void deleteById(int id) {
+		Session currentSession = entityManager.unwrap(Session.class);
 		
+		//delete object with primary
+		Query query =  currentSession.createQuery(
+				"delete from User where id =:userId");
+		
+		query.setParameter("userId", id);
+		query.executeUpdate();
 	}
 
 }
