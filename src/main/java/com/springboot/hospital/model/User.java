@@ -74,6 +74,22 @@ public class User {
 		this.deleted = deleted;
 		this.deletedDate = deletedDate;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getDatetimePasswordReset() {
+		return datetimePasswordReset;
+	}
+
+	public void setDatetimePasswordReset(LocalDateTime datetimePasswordReset) {
+		this.datetimePasswordReset = datetimePasswordReset;
+	}
 
 	public int getUserType() {
 		return userType;
