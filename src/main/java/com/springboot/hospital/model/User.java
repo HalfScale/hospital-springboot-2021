@@ -2,11 +2,13 @@ package com.springboot.hospital.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +17,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private int id;
 	
 	@Column(name="user_type")
@@ -53,6 +56,9 @@ public class User {
 	@Column(name="deleted_date")
 	private LocalDateTime deletedDate;
 	
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+	private UserDetail userDetail;
+	
 	public User() {
 	
 	}
@@ -60,7 +66,6 @@ public class User {
 	public User(int userType, String registrationToken, LocalDateTime datetimePasswordReset, String resetPassToken,
 			String email, String password, boolean isConfirmed, boolean enabled, LocalDateTime created,
 			LocalDateTime modified, boolean deleted, LocalDateTime deletedDate) {
-		super();
 		this.userType = userType;
 		this.registrationToken = registrationToken;
 		this.datetimePasswordReset = datetimePasswordReset;
