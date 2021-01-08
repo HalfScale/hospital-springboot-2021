@@ -12,6 +12,16 @@ public class Response {
 	private String description;
 	private Map data;
 	
+	public Response() {
+		
+	}
+	
+	public Response(int status, String description, Map data) {
+		this.status = status;
+		this.description = description;
+		this.data = data;
+	}
+	
 	public int getStatus() {
 		return status;
 	}
@@ -24,6 +34,11 @@ public class Response {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public Map getData() {
+		return data;
+	}
+	public void setData(Map data) {
+		this.data = data;
+	}
 	
 }

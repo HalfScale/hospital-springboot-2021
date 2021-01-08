@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.springboot.hospital.model.User;
 
-public interface UserDAO {
+public interface UserJpaDAO {
 	
 	List<User> findAll();
 	User findById(int id);
