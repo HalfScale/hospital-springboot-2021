@@ -192,13 +192,21 @@ public class User {
 		this.deletedDate = deletedDate;
 	}
 
+	public UserDetail getUserDetail() {
+		return userDetail;
+	}
+
+	public void setUserDetail(UserDetail userDetail) {
+		this.userDetail = userDetail;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userType=" + userType + ", registrationToken=" + registrationToken
 				+ ", datetimePasswordReset=" + datetimePasswordReset + ", resetPassToken=" + resetPassToken + ", email="
 				+ email + ", password=" + password + ", isConfirmed=" + isConfirmed + ", enabled=" + enabled
 				+ ", created=" + created + ", modified=" + modified + ", deleted=" + deleted + ", deletedDate="
-				+ deletedDate + "]";
+				+ deletedDate + ", userDetail=" + userDetail + "]";
 	}
 	
 }
