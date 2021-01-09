@@ -260,6 +260,14 @@ public class UserDetail {
 	public void setDeletedDate(LocalDateTime deletedDate) {
 		this.deletedDate = deletedDate;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "UserDetail [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", mobileNo=" + mobileNo
+				+ ", birthDate=" + birthDate + ", gender=" + gender + ", address=" + address + ", profileImage="
+				+ profileImage + ", doctorCodeId=" + doctorCodeId + ", doctorDescription=" + doctorDescription
+				+ ", noOfYearsExperience=" + noOfYearsExperience + ", education=" + education + ", schedule=" + schedule
+				+ ", expertise=" + expertise + ", created=" + created + ", modified=" + modified + ", deleted="
+				+ deleted + ", deletedDate=" + deletedDate + "]";
+	}
 }
