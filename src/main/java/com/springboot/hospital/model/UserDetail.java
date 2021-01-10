@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="user_details")
 public class UserDetail {
@@ -25,7 +27,8 @@ public class UserDetail {
 	private int id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "users_id")
+	@JoinColumn(name = "users_id", referencedColumnName = "id")
+	@JsonBackReference
 	private User user;
 	
 	@Column(name="first_name")

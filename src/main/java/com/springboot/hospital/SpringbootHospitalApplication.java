@@ -2,12 +2,18 @@ package com.springboot.hospital;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SpringbootHospitalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootHospitalApplication.class, args);
+	}
+	
+	@Bean
+	public PasswordEncoder encoder() {
+	    return new BCryptPasswordEncoder();
 	}
 
 }
