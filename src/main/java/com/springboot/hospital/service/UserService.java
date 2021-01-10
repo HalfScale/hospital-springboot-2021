@@ -1,9 +1,9 @@
 package com.springboot.hospital.service;
 
-import org.springframework.stereotype.Service;
+import com.springboot.hospital.model.User;
 
 
 public interface UserService {
 
-	
+	void save(User user);
 }
