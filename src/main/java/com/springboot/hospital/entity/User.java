@@ -1,4 +1,4 @@
-package com.springboot.hospital.model;
+package com.springboot.hospital.entity;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name="user")
@@ -22,8 +29,11 @@ public class User {
 	@Column(name="id")
 	private int id;
 	
+	@NotNull
+	@Min(0)
+	@Max(9999)
 	@Column(name="user_type")
-	private int userType;
+	private Integer userType;
 	
 	@Column(name="registration_token")
 	private String registrationToken;
@@ -34,9 +44,12 @@ public class User {
 	@Column(name="reset_pass_token")
 	private String resetPassToken;
 	
+	@NotBlank
+	@Email(message="Invalid email format")
 	@Column(name="email")
 	private String email;
 	
+	@NotBlank
 	@Column(name="password")
 	private String password;
 	
@@ -59,6 +72,7 @@ public class User {
 	private LocalDateTime deletedDate;
 	
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+	@Valid
 	@JsonManagedReference
 	private UserDetail userDetail;
 	
@@ -99,11 +113,11 @@ public class User {
 		this.datetimePasswordReset = datetimePasswordReset;
 	}
 
-	public int getUserType() {
+	public Integer getUserType() {
 		return userType;
 	}
 
-	public void setUserType(int userType) {
+	public void setUserType(Integer userType) {
 		this.userType = userType;
 	}
 

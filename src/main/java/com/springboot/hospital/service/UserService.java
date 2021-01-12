@@ -1,6 +1,6 @@
 package com.springboot.hospital.service;
 
-import com.springboot.hospital.model.User;
+import com.springboot.hospital.entity.User;
 
 
 public interface UserService {

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springboot.hospital.dao.UserRepository;
-import com.springboot.hospital.model.User;
+import com.springboot.hospital.entity.User;
 
 @Service
 public class UserServiceImpl implements UserService{
