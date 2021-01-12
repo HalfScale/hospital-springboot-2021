@@ -1,4 +1,4 @@
-package com.springboot.hospital.model;
+package com.springboot.hospital.entity;
 
 import java.util.Map;
 

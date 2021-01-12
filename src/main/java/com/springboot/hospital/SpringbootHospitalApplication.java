@@ -11,9 +11,4 @@ public class SpringbootHospitalApplication {
 		SpringApplication.run(SpringbootHospitalApplication.class, args);
 	}
 	
-	@Bean
-	public PasswordEncoder encoder() {
-	    return new BCryptPasswordEncoder();
-	}
-
 }

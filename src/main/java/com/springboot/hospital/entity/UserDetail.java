@@ -1,4 +1,4 @@
-package com.springboot.hospital.model;
+package com.springboot.hospital.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Size.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,19 +35,25 @@ public class UserDetail {
 	@JsonBackReference
 	private User user;
 	
+	@NotBlank(message="First Name is Required")
 	@Column(name="first_name")
 	private String firstName;
 	
+	@NotBlank(message="Last Name is Required")
 	@Column(name="last_name")
 	private String lastName;
 	
+	@Size(min = 11, message = "Mobile No. should be 11-13 digits")
+	@Size(max = 13, message = "Mobile No. should be 11-13 digits")
+	@NotBlank(message="Mobile No. is Required")
 	@Column(name="mobile_no")
-	private Long mobileNo;
+	private String mobileNo;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="birth_date")
 	private LocalDate birthDate;
 	
+	@NotNull
 	@Column(name="gender")
 	private int gender;
 	
@@ -87,7 +97,7 @@ public class UserDetail {
 		
 	}
 
-	public UserDetail(int id, User user, String firstName, String lastName, Long mobileNo, LocalDate birthDate,
+	public UserDetail(int id, User user, String firstName, String lastName, String mobileNo, LocalDate birthDate,
 			int gender, String address, String profileImage, Integer doctorCodeId, String doctorDescription,
 			Integer noOfYearsExperience, String education, String schedule, String expertise, LocalDateTime created,
 			LocalDateTime modified, boolean deleted, LocalDateTime deletedDate) {
@@ -144,11 +154,11 @@ public class UserDetail {
 		this.lastName = lastName;
 	}
 
-	public Long getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
 
-	public void setMobileNo(Long mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 
