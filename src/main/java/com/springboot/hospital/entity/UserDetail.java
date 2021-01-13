@@ -14,12 +14,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.Size.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.springboot.hospital.validator.Extended;
 
 @Entity
 @Table(name="user_details")
@@ -43,8 +44,8 @@ public class UserDetail {
 	@Column(name="last_name")
 	private String lastName;
 	
-	@Size(min = 11, message = "Mobile No. should be 11-13 digits")
-	@Size(max = 13, message = "Mobile No. should be 11-13 digits")
+	@Pattern(regexp = ".*(^[0-9]+$)", message = "Invalid Mobile No")
+	@Size(min = 11, max = 13, message = "Mobile No. should be 11-13 digits", groups = Extended.class)
 	@NotBlank(message="Mobile No. is Required")
 	@Column(name="mobile_no")
 	private String mobileNo;
