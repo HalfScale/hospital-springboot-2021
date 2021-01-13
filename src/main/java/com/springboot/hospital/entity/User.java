@@ -16,8 +16,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.springboot.hospital.validator.Extended;
 
 
 @Entity
@@ -44,12 +46,13 @@ public class User {
 	@Column(name="reset_pass_token")
 	private String resetPassToken;
 	
-	@NotBlank
-	@Email(message="Invalid email format")
+	@NotBlank(message = "Email is Required")
+	@Email(message="Invalid email format", groups = Extended.class)
 	@Column(name="email")
 	private String email;
 	
-	@NotBlank
+	@NotBlank(message = "Password is Required")
+	@Size(min = 6, max = 15, message = "Password should be 6-15 characters", groups = Extended.class)
 	@Column(name="password")
 	private String password;
 	
