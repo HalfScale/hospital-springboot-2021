@@ -1,6 +1,8 @@
 package com.springboot.hospital.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.assertj.core.util.Arrays;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,30 +12,37 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class MyUserDetails implements UserDetails{
 	
 	private String userName;
+	private String password;
+	private boolean active;
+	private List<GrantedAuthority> authorities;
 
 	public MyUserDetails() {
 	
 	}
 	
-	public MyUserDetails(String userName) {
-		this.userName = userName;
+	public MyUserDetails(User user) {
+		this.userName = user.getEmail();
+		this.password = user.getPassword();
+		this.active = true;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return (Collection<? extends GrantedAuthority>) Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+		ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		return authorities;
 	}
 
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return "pass";
+		return this.password;
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return userName;
+		return this.userName;
 	}
 
 	@Override
@@ -60,4 +69,6 @@ public class MyUserDetails implements UserDetails{
 		return true;
 	}
 
+
+	
 }
