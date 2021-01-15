@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.springboot.hospital.dao.UserRepository;
 import com.springboot.hospital.entity.MyUserDetails;
 import com.springboot.hospital.entity.User;
-import com.springboot.hospital.rest.UserRestController;
+import com.springboot.hospital.restcontroller.UserRestController;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
