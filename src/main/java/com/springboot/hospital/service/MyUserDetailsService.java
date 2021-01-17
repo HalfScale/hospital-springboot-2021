@@ -26,17 +26,15 @@ public class MyUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		
-		logger.info("loadUserByUsername pass arguement: {}", userName);
+		logger.info("User '{}' logging in", userName);
 		
 		Optional<User> user = userRepository.findByEmail(userName);
 		
-		if (!user.isPresent()) {
-			throw new UsernameNotFoundException("Not found: " + userName);
-		}
-		
-		logger.info("user details: {}, {}", user.get().getEmail(), user.get().getPassword());
-		
+		//Custom message for exceptions is handles in src/main/resources
 		user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
+		
+		logger.info("User '{}' successfully logged in.", user.get().getEmail());
+		
 		
 		return user.map(MyUserDetails::new).get();
 	}
