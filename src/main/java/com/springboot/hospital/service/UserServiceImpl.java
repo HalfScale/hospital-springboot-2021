@@ -1,5 +1,8 @@
 package com.springboot.hospital.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -42,8 +45,12 @@ public class UserServiceImpl implements UserService{
 		
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setRegistrationToken(token);
+		user.setCreated(LocalDateTime.now());
+		user.setModified(LocalDateTime.now());
 		UserDetail userDetail = user.getUserDetail();
 		userDetail.setUser(user);
+		userDetail.setCreated(LocalDateTime.now());
+		userDetail.setModified(LocalDateTime.now());
 		
 		
 		logger.info("Before saving: {}", user.toString());
@@ -53,6 +60,21 @@ public class UserServiceImpl implements UserService{
 	
 	private boolean emailExist(String email) {
 		return userRepository.findByEmail(email).isPresent();
+	}
+
+	@Override
+	public User getVerificationToken(String token) {
+		return userRepository.findByRegistrationToken(token).get();
+	}
+
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public Optional<User> findById(int id) {
+		return userRepository.findById(id);
 	}
 	
 	
