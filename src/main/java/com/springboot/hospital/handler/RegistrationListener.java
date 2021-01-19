@@ -31,7 +31,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 		
 		String recipeintAddress = user.getEmail();
 		String subject = "Registration Confirmation";
-		String confirmationUrl = event.getAppUrl() + "/registration/confirm" + user.getRegistrationToken();
+		String confirmationUrl = event.getAppUrl() + "/registration/confirm/" + user.getRegistrationToken();
 		
 		// Send message to the recipient
 		
