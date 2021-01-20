@@ -76,6 +76,38 @@ public class UserServiceImpl implements UserService{
 	public Optional<User> findById(int id) {
 		return userRepository.findById(id);
 	}
-	
+
+	@Override
+	public User update(User user) throws Exception{
+		Optional<User> queriedUser = userRepository.findById(user.getId());
+		
+		if (!queriedUser.isPresent()) {
+			throw new Exception("User not found during update");
+		}
+		
+		User persistedUser = queriedUser.get();
+		UserDetail persistedUserDetail = persistedUser.getUserDetail();
+		
+		// Update User's UserDetail
+		UserDetail userDetail = user.getUserDetail();
+		persistedUserDetail.setFirstName(userDetail.getFirstName());
+		persistedUserDetail.setLastName(userDetail.getLastName());
+		persistedUserDetail.setMobileNo(userDetail.getMobileNo());
+		persistedUserDetail.setGender(userDetail.getGender());
+		persistedUserDetail.setAddress(userDetail.getAddress());
+		persistedUserDetail.setBirthDate(userDetail.getBirthDate());
+		persistedUserDetail.setAddress(userDetail.getAddress());
+		persistedUserDetail.setModified(LocalDateTime.now());
+		
+		// Update User
+		persistedUser.setEmail(user.getEmail());
+		persistedUser.setPassword(passwordEncoder.encode(user.getPassword()));
+		persistedUser.setModified(LocalDateTime.now());
+		
+		userRepository.save(persistedUser);
+		
+		logger.info("User data: {}", persistedUser);
+		return persistedUser;
+	}
 	
 }

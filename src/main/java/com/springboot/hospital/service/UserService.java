@@ -9,6 +9,7 @@ import com.springboot.hospital.entity.User;
 public interface UserService {
 
 	void save(User user);
+	User update(User user) throws Exception;
 	List<User> findAll();
 	Optional<User> findById(int id);
 	String generateToken();
