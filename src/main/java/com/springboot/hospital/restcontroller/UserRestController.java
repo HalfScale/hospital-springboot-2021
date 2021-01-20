@@ -80,9 +80,9 @@ public class UserRestController {
 	}
 	
 	@PutMapping("/users/edit")
-	public Response updateUser(@RequestBody User user) {
-		userService.save(user);
-		return Utils.<User>generateResponse(0, "User update successful", user);
+	public Response updateUser(@RequestBody User user) throws Exception{
+		User persistedUser = userService.update(user);
+		return Utils.<User>generateResponse(0, "User update successful", persistedUser);
 	}
 	
 	@GetMapping("/users")
