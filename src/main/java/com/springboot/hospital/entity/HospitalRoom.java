@@ -56,7 +56,7 @@ public class HospitalRoom {
 	@Column(name="deleted_date")
 	private LocalDateTime deletedDate;
 	
-	@JsonManagedReference
+	// Do not put JsonManagedReference annotation, it will produce an error
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="hospitalRoom")
 	private List<RoomReservation> roomReservaition;
 
